@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MineSweeper</title>
+    <style>
+        .row {
+            display: flex;
+        }
+
+        .cell {
+            height: 20px;
+            width: 20px;
+            cursor: pointer;
+            font-size: 0;
+            border: 1px solid black;
+
+            text-align: center;
+            padding: 10px;
+        }
+
+        .opened {
+            font-size: 14px;
+        }
+
+        .game-end {
+            border: 2px solid red;
+            width: 378px;
+        }
+
+        .red-cell {
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+<main class="mine-container"></main>
+<script src="index.js"></script>
+</body>
+</html>
