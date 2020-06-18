@@ -1,8 +1,12 @@
 const log = console.log.bind(console)
 
-const sel = (selector) => document.querySelector(selector)
+const eleSelector = (selector) => document.querySelector(selector)
 
-const selAll = (selector) => document.querySelectorAll(selector)
+const eleSelectorAll = (selector) => document.querySelectorAll(selector)
+
+const bindEleEvent = function(element, eventName, callback) {
+    element.addEventListener(eventName, callback)
+}
 
 const templateCell = function(line, x) {
     let container = ''
@@ -34,12 +38,12 @@ const renderSquare = function(square) {
     let container = `
         <div id="id-div-mime">${ allRow }</div>`
 
-    let eleRoot = sel('.mine-root')
+    let eleRoot = eleSelector('.mine-root')
     eleRoot.insertAdjacentHTML( 'beforeend', container)
 }
 
 const bindEventDelegate = function(square) {
-    let allCell = sel('#id-div-mime')
+    let allCell = eleSelector('#id-div-mime')
     allCell.addEventListener('click', (e) => {
         let self = e.target
         let isTarget = self.classList.contains('cell')
@@ -60,7 +64,7 @@ const vjkl = function(cell, square) {
 
     if (number === '9') {
         // 游戏结束
-        let container = sel('#id-div-mime')
+        let container = eleSelector('#id-div-mime')
         container.classList.add('game-end')
         cell.classList.add('opened')
         cell.classList.add('red-cell')
@@ -98,7 +102,7 @@ const vjklAround = function(square, x, y) {
 const vjkl1 = function(square, x, y) {
     if (x >= 0 && y >= 0 && x < square[0].length && y < square.length) {
         let selName = `[data-x="${ x }"][data-y="${ y }"]`
-        let cell = sel(selName)
+        let cell = eleSelector(selName)
 
         let classList = cell.classList
         let hasOpen = classList.contains('opened')
@@ -124,12 +128,30 @@ const test = () => {
     testMineData()
 }
 
-const __main = () => {
+const game = () => {
     let square = createMineData()
     log('square', square)
     renderSquare(square)
     bindEventDelegate(square)
-    // test()
+}
+
+const clearGame = () => {
+    let eleRoot = eleSelector('.mine-root')
+    eleRoot.innerHTML = ''
+}
+
+const newGame = () => {
+    let btn = eleSelector('.new-game')
+    bindEleEvent(btn, 'click', function (e) {
+        clearGame()
+        game()
+
+    })
+}
+
+const __main = () => {
+    game()
+    newGame()
 }
 
 __main()
