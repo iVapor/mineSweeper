@@ -1,0 +1,81 @@
+
+const createRandom = (num) => {
+    return Math.random() > 0.8 ? num : 0
+}
+
+const createLine = (num) => {
+    let container = []
+    for (let i = 0; i < num; i++) {
+        let cell = createRandom(num)
+        container.push(cell)
+    }
+
+    return container
+}
+
+const createMine = (num) => {
+    let container = []
+    for (let i = 0; i < num; i++) {
+        let line = createLine(num)
+        container.push(line)
+    }
+
+    return container
+}
+
+const countLocation = (square, x, y) => {
+    let row = square[0]
+    let inSquare = x >= 0 && y >= 0 &&
+        (x < row.length) && ( y < square.length )
+
+    if (inSquare) {
+        let cell =  square[y][x]
+        let notMine = cell !== 9
+        if (notMine) {
+            square[y][x] = cell + 1
+        }
+
+    }
+}
+
+const countAround = (square, x, y) => {
+    // 左边三个
+    countLocation(square, x - 1, y - 1)
+    countLocation(square, x - 1, y)
+    countLocation(square, x - 1, y + 1)
+
+    // 上下两个
+    countLocation(square, x, y - 1)
+    countLocation(square, x, y + 1)
+
+    // 右边三个
+    countLocation(square, x + 1, y - 1)
+    countLocation(square, x + 1, y)
+    countLocation(square, x + 1, y + 1)
+}
+
+const countMine = (square) => {
+    for (let i = 0; i < square.length; i++) {
+        let row = square[i]
+        for (let j = 0; j < row.length; j++) {
+            let cell = row[j]
+            if (cell === 9) {
+                countAround(square, j, i)
+            }
+        }
+    }
+}
+
+const createMineData = () => {
+    let s = ' [[9,1,0,0,0,1,1,1,0],[1,1,0,0,1,2,9,1,0],[1,1,1,0,1,9,2,1,0],[1,9,2,1,1,1,1,0,0],[1,2,9,1,0,0,1,1,1],[1,2,1,1,0,1,2,9,1],[9,1,0,0,1,2,9,2,1],[1,2,1,1,1,9,2,1,0],[0,1,9,1,1,1,1,0,0]]'
+    let square = JSON.parse(s)
+
+    return square
+}
+
+const testMineData = () => {
+    let square = createMine(9)
+
+    let counted = countMine(square)
+    log('square', square)
+}

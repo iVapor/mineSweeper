@@ -118,17 +118,17 @@ const vjkl1 = function(square, x, y) {
 }
 
 const test = () => {
-    let lineTest = [1, 2, 3, 5, 9]
-    let lineEle = templateCell(lineTest, 8)
+    // let lineTest = [1, 2, 3, 5, 9]
+    // let lineEle = templateCell(lineTest, 8)
+    testMineData()
 }
 
 const __main = () => {
-    let s = ' [[9,1,0,0,0,1,1,1,0],[1,1,0,0,1,2,9,1,0],[1,1,1,0,1,9,2,1,0],[1,9,2,1,1,1,1,0,0],[1,2,9,1,0,0,1,1,1],[1,2,1,1,0,1,2,9,1],[9,1,0,0,1,2,9,2,1],[1,2,1,1,1,9,2,1,0],[0,1,9,1,1,1,1,0,0]]'
-    let square = JSON.parse(s)
-    log('square', square)
-    renderSquare(square)
-    bindEventDelegate(square)
-    // test()
+    // let square = createMineData()
+    // log('square', square)
+    // renderSquare(square)
+    // bindEventDelegate(square)
+    test()
 }
 
 __main()
