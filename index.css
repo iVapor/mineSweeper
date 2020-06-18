@@ -25,6 +25,10 @@ body {
     border-radius: 4px;
 }
 
+.cell:hover {
+    background: #dcd1bd;
+}
+
 .opened {
     font-size: 20px;
 }

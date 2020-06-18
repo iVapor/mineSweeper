@@ -95,18 +95,10 @@ const vjklAround = function(square, x, y) {
     vjkl1(square, x + 1, y + 1)
 }
 
-
 const vjkl1 = function(square, x, y) {
-    log('before if x', x, 'y', y)
-
     if (x >= 0 && y >= 0 && x < square[0].length && y < square.length) {
-
-        // let allCell = selAll('.cell')
-        log('x', x, typeof x, 'y', y)
         let selName = `[data-x="${ x }"][data-y="${ y }"]`
-        log('selName', selName)
         let cell = sel(selName)
-        log('before filter, cell', cell)
 
         let classList = cell.classList
         let hasOpen = classList.contains('opened')
@@ -114,9 +106,7 @@ const vjkl1 = function(square, x, y) {
             return
         }
 
-        log('cell', cell)
         let { number } = cell.dataset
-
         if (number === '9') {
             // 什么也不做
         } else if (number === '0') {
@@ -126,8 +116,6 @@ const vjkl1 = function(square, x, y) {
             cell.classList.add('opened')
         }
     }
-
-
 }
 
 const test = () => {
