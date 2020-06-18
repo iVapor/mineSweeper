@@ -34,7 +34,7 @@ const renderSquare = function(square) {
     let container = `
         <div id="id-div-mime">${ allRow }</div>`
 
-    let eleRoot = sel('.mine-container')
+    let eleRoot = sel('.mine-root')
     eleRoot.insertAdjacentHTML( 'beforeend', container)
 }
 

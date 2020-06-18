@@ -3,38 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>MineSweeper</title>
-    <style>
-        .row {
-            display: flex;
-        }
-
-        .cell {
-            height: 20px;
-            width: 20px;
-            cursor: pointer;
-            font-size: 0;
-            border: 1px solid black;
-
-            text-align: center;
-            padding: 10px;
-        }
-
-        .opened {
-            font-size: 14px;
-        }
-
-        .game-end {
-            border: 2px solid red;
-            width: 378px;
-        }
-
-        .red-cell {
-            border: 1px solid red;
-        }
-    </style>
+    <link rel="stylesheet" href="index.css" type="text/css"/>
 </head>
 <body>
-<main class="mine-container"></main>
+<div class="title">
+    <div class="new-game">再来一局</div>
+</div>
+<main class="mine-container">
+    <div class="mine-root"></div>
+</main>
 <script src="index.js"></script>
 </body>
 </html>

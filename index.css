@@ -1,0 +1,68 @@
+body {
+    margin: 0;
+}
+
+.title {
+    margin-top: 20px;
+}
+.row {
+    display: flex;
+}
+
+.cell {
+    height: 24px;
+    width: 24px;
+    cursor: pointer;
+    font-size: 0;
+    border: 1px solid black;
+
+    text-align: center;
+    padding: 10px;
+    margin: 4px;
+    background: wheat;
+
+    line-height: 24px;
+    border-radius: 4px;
+}
+
+.opened {
+    font-size: 20px;
+}
+
+.red-cell {
+    border: 1px solid red;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+}
+.new-game {
+    height:24px;
+    background:rgba(255,255,255,1);
+    padding: 6px 16px;
+
+    border-radius:8px;
+    border:1px solid rgba(226,226,234,1);
+    cursor: pointer;
+
+    font-size:14px;
+    font-family:SFUIDisplay-Light,SFUIDisplay;
+    font-weight:300;
+    color:rgba(105,105,116,1);
+    line-height:24px;
+}
+
+.mine-container {
+    display: flex;
+    justify-content: center;
+
+    margin: 0 auto;
+    margin-top: 20px;
+
+}
+
+.mine-root {
+    background: #d2f3a0;
+    padding: 10px;
+}
