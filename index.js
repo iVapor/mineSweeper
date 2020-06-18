@@ -81,18 +81,18 @@ const vjkl = function(cell, square) {
  */
 const vjklAround = function(square, x, y) {
     // 左边三个
-    // vjkl1(square, x - 1, y - 1)
-    // vjkl1(square, x - 1, y)
-    // vjkl1(square, x - 1, y + 1)
+    vjkl1(square, x - 1, y - 1)
+    vjkl1(square, x, y - 1)
+    vjkl1(square, x + 1, y - 1)
 
     // 上下两个
-    // vjkl1(square, x , y - 1)
-    // vjkl1(square, x , y + 1)
+    vjkl1(square, x - 1 , y)
+    vjkl1(square, x + 1, y)
 
     // 右边三个
-    // vjkl1(square, x - 1, y + 1)
+    vjkl1(square, x - 1, y + 1)
     vjkl1(square, x, y + 1)
-    // vjkl1(square, x + 1, y + 1)
+    vjkl1(square, x + 1, y + 1)
 }
 
 
@@ -103,7 +103,7 @@ const vjkl1 = function(square, x, y) {
 
         // let allCell = selAll('.cell')
         log('x', x, typeof x, 'y', y)
-        let selName = `[data-x="${ x }"], [data-y="${ y }"]`
+        let selName = `[data-x="${ x }"][data-y="${ y }"]`
         log('selName', selName)
         let cell = sel(selName)
         log('before filter, cell', cell)

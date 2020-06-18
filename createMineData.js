@@ -1,6 +1,6 @@
 
 const createRandom = (num) => {
-    return Math.random() > 0.9 ? num : 0
+    return Math.random() > 0.8 ? num : 0
 }
 
 const createLine = (num) => {
