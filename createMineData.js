@@ -1,6 +1,6 @@
 
 const createRandom = (num) => {
-    return Math.random() > 0.8 ? num : 0
+    return Math.random() > 0.9 ? num : 0
 }
 
 const createLine = (num) => {
@@ -67,15 +67,15 @@ const countMine = (square) => {
 }
 
 const createMineData = () => {
-    let s = ' [[9,1,0,0,0,1,1,1,0],[1,1,0,0,1,2,9,1,0],[1,1,1,0,1,9,2,1,0],[1,9,2,1,1,1,1,0,0],[1,2,9,1,0,0,1,1,1],[1,2,1,1,0,1,2,9,1],[9,1,0,0,1,2,9,2,1],[1,2,1,1,1,9,2,1,0],[0,1,9,1,1,1,1,0,0]]'
-    let square = JSON.parse(s)
+    let square = createMine(9)
+    countMine(square)
 
     return square
 }
 
 const testMineData = () => {
-    let square = createMine(9)
-
-    let counted = countMine(square)
-    log('square', square)
+    // let square = createMine(9)
+    //
+    // let counted = countMine(square)
+    // log('square', square)
 }
