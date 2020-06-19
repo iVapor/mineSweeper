@@ -12,8 +12,16 @@ const templateCell = function(line, x) {
     let container = ''
     for (let i = 0; i < line.length; i++) {
         let member = line[i]
+        let ele = member
+
+        if (member === 9) {
+            let apple = '<img class="apple" src="./img/red_apple.png" alt="apple"/>'
+            ele = apple
+        }
         let cell = `
-            <div class="cell" data-number="${ member }" data-x="${ x }" data-y="${ i }">${ member }</div>`
+            <div class="cell" data-number="${ member }" data-x="${ x }" data-y="${ i }">
+                
+                ${ ele }</div>`
         container += cell
     }
 

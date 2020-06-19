@@ -10,13 +10,17 @@ body {
 .cell {
     height: 24px;
     width: 24px;
+
+    display: flex;
+    justify-content: center;
+
     cursor: pointer;
     font-size: 0;
     border: 1px solid black;
     text-align: center;
     padding: 10px;
     margin: 4px;
-    background: #faf7f0;
+    background: #e5eff5;
     line-height: 24px;
     border-radius: 4px;
 }
@@ -42,6 +46,8 @@ body {
 .mine-root {
     background:rgba(255,255,255,1);
     padding: 10px;
+    box-shadow:0px 2px 6px 0px rgba(0,0,0,0.04);
+    border-radius:8px;
 }
 
 .wrapper {
@@ -49,12 +55,9 @@ body {
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 10px;
     margin: 20px 20px;
-
 }
 
 .action-panel {
-    display: flex;
-    justify-content: center;
     background:rgba(255,255,255,1);
     box-shadow:0px 2px 12px 0px rgba(0,0,0,0.04);
 
@@ -76,4 +79,23 @@ body {
     font-weight:300;
     color:rgba(105,105,116,1);
     line-height:24px;
+}
+
+.new-game:active {
+    background: rgba(196, 194, 194, 0.4);
+}
+
+.time-fruit {
+    background:linear-gradient(225deg, rgb(123, 204, 247) 0%, rgb(180, 223, 255) 100%);
+    border-radius:6px;
+}
+
+.apple {
+    display: none;
+    width: 36px;
+    height: 36px;
+}
+
+.opened .apple {
+    display: block;
 }
