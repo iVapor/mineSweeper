@@ -16,7 +16,7 @@ body {
 
     cursor: pointer;
     font-size: 0;
-    border: 1px solid black;
+    border: 1px solid silver;
     text-align: center;
     padding: 10px;
     margin: 4px;
@@ -75,7 +75,7 @@ body {
     cursor: pointer;
 
     font-size:14px;
-    font-family:SFUIDisplay-Light,SFUIDisplay;
+    /*font-family:SFUIDisplay-Light,SFUIDisplay;*/
     font-weight:300;
     color:rgba(105,105,116,1);
     line-height:24px;
@@ -85,9 +85,27 @@ body {
     background: rgba(196, 194, 194, 0.4);
 }
 
-.time-fruit {
+.time-container {
+    display: flex;
+    justify-content: center;
     background:linear-gradient(225deg, rgb(123, 204, 247) 0%, rgb(180, 223, 255) 100%);
     border-radius:6px;
+    padding: 10px;
+}
+
+.time-count {
+    padding-left: 10px;
+}
+
+.time-icon .iconfont {
+    vertical-align: middle;
+    font-size: 40px;
+    color: white;
+}
+
+.time-count {
+    vertical-align: middle;
+    font-size: 30px;
 }
 
 .apple {

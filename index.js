@@ -50,6 +50,28 @@ const renderSquare = function(square) {
     eleRoot.insertAdjacentHTML( 'beforeend', container)
 }
 
+const changeTime = () => {
+    let secondEle = eleSelector('.show-second')
+    let current = secondEle.innerHTML
+    let updateSecond = Number(current) + 1
+
+    if (String(updateSecond).length === 1) {
+        updateSecond = `0${ updateSecond }`
+    }
+
+    if (updateSecond === 61) {
+
+    }
+    secondEle.innerHTML = updateSecond
+
+}
+
+const startTime = () => {
+    setInterval(function () {
+        changeTime()
+    }, 1000)
+}
+
 const bindEventDelegate = function(square) {
     let allCell = eleSelector('#id-div-mime')
     allCell.addEventListener('click', (e) => {
@@ -59,6 +81,7 @@ const bindEventDelegate = function(square) {
             vjkl(self, square)
         }
 
+        startTime()
     })
 }
 
