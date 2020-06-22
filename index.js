@@ -50,25 +50,38 @@ const renderSquare = function(square) {
     eleRoot.insertAdjacentHTML( 'beforeend', container)
 }
 
-const changeTime = () => {
+const changeTime = (timeMark) => {
     let secondEle = eleSelector('.show-second')
     let current = secondEle.innerHTML
     let updateSecond = Number(current) + 1
 
-    if (String(updateSecond).length === 1) {
-        updateSecond = `0${ updateSecond }`
+
+
+    let minEle = eleSelector('.show-min')
+    let currentMin = minEle.innerHTML
+
+    log('updateSecond', updateSecond)
+    if (updateSecond === 2) {
+        let updateMin = Number(currentMin) + 1
+        if (updateMin === 30) {
+            clearInterval(timeMark)
+        }
+        updateMin = `0${ updateMin }`
+
+        minEle.innerHTML = updateMin
+        updateSecond = '00'
     }
 
-    if (updateSecond === 61) {
-
+    if (String(updateSecond).length === 1) {
+        updateSecond = `0${ updateSecond }`
     }
     secondEle.innerHTML = updateSecond
 
 }
 
 const startTime = () => {
-    setInterval(function () {
-        changeTime()
+    let timeMark =  setInterval(function () {
+        changeTime(timeMark)
     }, 1000)
 }
 
