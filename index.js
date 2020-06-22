@@ -65,7 +65,7 @@ const changeTime = (timeMark) => {
     let minEle = eleSelector('.show-min')
     let currentMin = minEle.innerHTML
 
-    if (updateSecond === 2) {
+    if (updateSecond === 61) {
         let updateMin = Number(currentMin) + 1
         if (updateMin === 30) {
             clearInterval(timeMark)
@@ -96,7 +96,8 @@ const toggleFlag = (self) => {
     let countEle = eleSelector('.mine-count')
     let limit = Number(countEle.dataset.limit)
 
-    if (limit !== 0) {
+    let notOpen = !self.classList.contains('opened')
+    if (limit !== 0 && notOpen) {
         flagEle.classList.toggle('show-flag')
     }
 }
@@ -141,14 +142,21 @@ const countFlag = () => {
 
 const bindEventDelegate = function(square) {
     let allCell = eleSelector('#id-div-mime')
+    let timeFlag = true
     allCell.addEventListener('click', (e) => {
         let self = e.target
         let isTarget = self.classList.contains('cell')
         if (isTarget) {
             vjkl(self, square)
+
+            if (timeFlag) {
+                startTime()
+                timeFlag = false
+            }
         }
 
-        startTime()
+
+
     })
 
     setFlag()
