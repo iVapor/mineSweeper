@@ -93,7 +93,12 @@ const startTime = () => {
 
 const toggleFlag = (self) => {
     let flagEle = self.querySelector('.flag')
-    flagEle.classList.toggle('show-flag')
+    let countEle = eleSelector('.mine-count')
+    let limit = Number(countEle.dataset.limit)
+
+    if (limit !== 0) {
+        flagEle.classList.toggle('show-flag')
+    }
 }
 
 /**
@@ -111,6 +116,7 @@ const setFlag = () => {
             toggleFlag(self)
             countFlag()
         } else if (isFlag) {
+            // 取消放置
             self.classList.toggle('show-flag')
             countFlag()
         }
@@ -128,7 +134,9 @@ const countFlag = () => {
     let currentFlag = allFlag.length
     log('total', total)
 
-    countEle.innerHTML = total - currentFlag
+    let restMine = total - currentFlag
+    countEle.innerHTML = restMine
+    countEle.dataset.limit = restMine
 }
 
 const bindEventDelegate = function(square) {
