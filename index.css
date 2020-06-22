@@ -87,8 +87,9 @@ body {
 }
 
 .time-container {
+    position: relative;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     background:linear-gradient(225deg, rgb(123, 204, 247) 0%, rgb(180, 223, 255) 100%);
     border-radius:6px;
     padding: 10px;
@@ -113,6 +114,38 @@ body {
     display: none;
     width: 36px;
     height: 36px;
+}
+
+.num-container {
+    position: relative;
+    vertical-align: middle;
+}
+
+.apple-num {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    /*vertical-align: middle;*/
+}
+
+.mine-count {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 44px;
+    font-size: 30px;
+}
+
+.flag {
+    display: none;
+    width: 30px;
+    height: 30px;
+}
+
+.show-flag {
+    display: inline;
 }
 
 .opened .apple {

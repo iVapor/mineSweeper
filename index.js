@@ -18,6 +18,11 @@ const templateCell = function(line, x) {
             let apple = '<img class="apple" src="./img/red_apple.png" alt="apple"/>'
             ele = apple
         }
+
+        ele = `
+            <img class="flag" src="./img/flag.png" alt="flag"/>
+            <span>${ member }</span>
+        `
         let cell = `
             <div class="cell" data-number="${ member }" data-x="${ x }" data-y="${ i }">
                 
@@ -60,13 +65,14 @@ const changeTime = (timeMark) => {
     let minEle = eleSelector('.show-min')
     let currentMin = minEle.innerHTML
 
-    log('updateSecond', updateSecond)
     if (updateSecond === 2) {
         let updateMin = Number(currentMin) + 1
         if (updateMin === 30) {
             clearInterval(timeMark)
         }
-        updateMin = `0${ updateMin }`
+        if (String(updateMin).length === 1) {
+            updateMin = `0${ updateMin }`
+        }
 
         minEle.innerHTML = updateMin
         updateSecond = '00'
@@ -85,6 +91,46 @@ const startTime = () => {
     }, 1000)
 }
 
+const toggleFlag = (self) => {
+    let flagEle = self.querySelector('.flag')
+    flagEle.classList.toggle('show-flag')
+}
+
+/**
+ * 放置旗帜
+ */
+const setFlag = () => {
+    let allCell = eleSelector('#id-div-mime')
+    allCell.addEventListener('contextmenu', (e) => {
+        e.preventDefault()
+        let self = e.target
+        let isTarget = self.classList.contains('cell')
+        let isFlag = self.classList.contains('flag')
+
+        if (isTarget) {
+            toggleFlag(self)
+            countFlag()
+        } else if (isFlag) {
+            self.classList.toggle('show-flag')
+            countFlag()
+        }
+
+    })
+}
+
+/**
+ * 统计雷
+ */
+const countFlag = () => {
+    let allFlag = eleSelectorAll('.show-flag')
+    let countEle = eleSelector('.mine-count')
+    let total = Number(countEle.dataset.count)
+    let currentFlag = allFlag.length
+    log('total', total)
+
+    countEle.innerHTML = total - currentFlag
+}
+
 const bindEventDelegate = function(square) {
     let allCell = eleSelector('#id-div-mime')
     allCell.addEventListener('click', (e) => {
@@ -96,6 +142,31 @@ const bindEventDelegate = function(square) {
 
         startTime()
     })
+
+    setFlag()
+}
+
+/**
+ * 统计生成的地雷
+ */
+const countCreateMine = (square) => {
+    let count = 0
+    for (let i = 0; i < square.length; i++) {
+        let row = square[i]
+
+        for (let j = 0; j < row.length; j++) {
+            let cell = row[j]
+            if (cell === 9) {
+                count++
+            }
+        }
+    }
+
+    let countEle = `<span class="mine-count" data-count="${ count }"
+            data-limit="${ count }"
+            >${ count }</span>`
+    let container = eleSelector('.num-container')
+    container.insertAdjacentHTML('beforeend', countEle)
 }
 
 const vjkl = function(cell, square) {
@@ -175,6 +246,7 @@ const test = () => {
 const game = () => {
     let square = createMineData()
     log('square', square)
+    countCreateMine(square)
     renderSquare(square)
     bindEventDelegate(square)
 }
