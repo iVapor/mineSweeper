@@ -185,6 +185,20 @@ const countCreateMine = (square) => {
     container.insertAdjacentHTML('beforeend', countEle)
 }
 
+const showEndPop = () => {
+    Swal.fire({
+        title: '游戏结束',
+        text: '想要再来一局吗？',
+        icon: 'error',
+        confirmButtonText: '新游戏'
+    }).then((result) => {
+        if (result.value) {
+            clearGame()
+            game()
+        }
+    })
+}
+
 const vjkl = function(cell, square) {
     let { number, x, y } = cell.dataset
     let classList = cell.classList
@@ -199,6 +213,8 @@ const vjkl = function(cell, square) {
         container.classList.add('game-end')
         cell.classList.add('opened')
         cell.classList.add('red-cell')
+        showEndPop()
+
     } else if (number === '0') {
         cell.classList.add('opened')
         vjklAround(square, Number(x), Number(y))
@@ -269,7 +285,12 @@ const game = () => {
 
 const clearGame = () => {
     let eleRoot = eleSelector('.mine-root')
+    log('eleRoot', eleRoot)
     eleRoot.innerHTML = ''
+
+    // 地雷统计
+    let numContainer = eleSelector('.num-container')
+    numContainer.removeChild(eleSelector('.mine-count'))
 }
 
 const newGame = () => {
