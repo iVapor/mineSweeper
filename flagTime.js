@@ -1,5 +1,32 @@
+const showSuccessPop = () => {
+    Swal.fire({
+        title: 'You win',
+        text: 'Congratulations! 🎉🎉🎉',
+        icon: 'success',
+        confirmButtonText: 'new game'
+    })
+}
+
+const validateFlag = () => {
+    let allFlag = eleSelectorAll('.show-flag')
+    let countEle = eleSelector('.mine-count')
+    let total = Number(countEle.dataset.count)
+    let allMine = total === allFlag.length
+
+    let allRight = Array.from(allFlag).every(item => {
+        let cell = Number(item.dataset.number)
+        return cell === 9
+    })
+
+    let passGame = allMine && allRight
+    if (passGame) {
+        showSuccessPop()
+    }
+
+}
 
 const toggleFlag = (self) => {
+    log('self', self.dataset.number)
     let flagEle = self.querySelector('.flag')
     let countEle = eleSelector('.mine-count')
     let limit = Number(countEle.dataset.limit)
@@ -7,6 +34,11 @@ const toggleFlag = (self) => {
     let notOpen = !self.classList.contains('opened')
     if (limit !== 0 && notOpen) {
         flagEle.classList.toggle('show-flag')
+
+        let markMine = flagEle.classList.contains('show-flag')
+        if (markMine) {
+            validateFlag()
+        }
     }
 }
 
@@ -97,7 +129,7 @@ const resetTime = () => {
 }
 
 /**
- * 统计生成的地雷
+ * count created mine
  */
 const countCreateMine = (square) => {
     let count = 0

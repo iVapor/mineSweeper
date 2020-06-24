@@ -5,18 +5,19 @@ const templateCell = function(line, x) {
         let member = line[i]
         let ele = member
 
+        let inner = `<span>${ member }</span>`
         if (member === 9) {
             let apple = '<img class="apple" src="./img/red_apple.png" alt="apple"/>'
-            ele = apple
+            inner = apple
         }
 
         ele = `
-            <img class="flag" src="./img/flag.png" alt="flag"/>
-            <span>${ member }</span>
+            <img class="flag" data-number="${ member }" 
+                src="./img/flag.png" alt="flag"/>
+            ${ inner }
         `
         let cell = `
             <div class="cell" data-number="${ member }" data-x="${ x }" data-y="${ i }">
-                
                 ${ ele }</div>`
         container += cell
     }
@@ -71,10 +72,10 @@ const bindEventDelegate = function(square) {
 
 const showEndPop = () => {
     Swal.fire({
-        title: '游戏结束',
-        text: '想要再来一局吗？',
+        title: 'Game over',
+        text: 'Do you want another turn?',
         icon: 'error',
-        confirmButtonText: '新游戏'
+        confirmButtonText: 'new game'
     }).then((result) => {
         if (result.value) {
             clearGame()
@@ -169,7 +170,6 @@ const game = () => {
 
 const clearGame = () => {
     let eleRoot = eleSelector('.mine-root')
-    log('eleRoot', eleRoot)
     eleRoot.innerHTML = ''
 
     // 地雷统计
