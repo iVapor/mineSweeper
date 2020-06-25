@@ -1,2 +1,5 @@
-# mineSweeper
-A pure JavaScript mineSweeper game with fruit theme.
+# Mark Apple 🍎
+A brief and graceful minesweeper game. It runs with pure JavaScript.
+
+Have fun!
+![](./img/markApple.gif)

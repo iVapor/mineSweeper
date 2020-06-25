@@ -163,13 +163,13 @@ body {
 }
 
 .tutorial-title {
-    text-align: center;
+    /*text-align: center;*/
     font-size: larger;
 
 }
 
 .tutorial-content {
-    text-align: center;
+    /*text-align: center;*/
     /*font-size: large;*/
     margin-top: 10px;
 }
