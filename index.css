@@ -68,29 +68,38 @@ body {
 }
 
 .new-game {
-    height:24px;
-    background:rgba(255,255,255,1);
+    height: 24px;
+    background: rgba(255,255,255,1);
     padding: 6px 16px;
+    border-radius: 8px;
 
-    border-radius:8px;
-    border:1px solid rgba(226,226,234,1);
+    border: 1px solid rgba(226,226,234,1);
     cursor: pointer;
+    font-size: 14px;
 
-    font-size:14px;
-    /*font-family:SFUIDisplay-Light,SFUIDisplay;*/
-    /*font-weight:300;*/
-    color:rgba(105,105,116,1);
-    line-height:24px;
+    line-height: 24px;
+    width: fit-content;
+    margin-top: 20px;
 }
 
+.new-game:hover {
+    background: rgba(226, 226, 226, 0.4);
+}
 .new-game:active {
     background: rgba(196, 194, 194, 0.4);
 }
 
+.title {
+    text-align: center;
+    font-size: 24px;
+}
+
 .time-container {
+    margin-top: 20px;
     position: relative;
     display: flex;
     justify-content: space-around;
+
     background:linear-gradient(225deg, rgb(123, 204, 247) 0%, rgb(180, 223, 255) 100%);
     border-radius:6px;
     padding: 10px;
@@ -151,4 +160,23 @@ body {
 
 .opened .apple {
     display: block;
+}
+
+.tutorial-title {
+    text-align: center;
+    font-size: larger;
+
+}
+
+.tutorial-content {
+    text-align: center;
+    /*font-size: large;*/
+    margin-top: 10px;
+}
+
+.content-back {
+    margin-top: 20px;
+    background: #f9fbe2;
+    border-radius: 8px;
+    padding: 10px;
 }

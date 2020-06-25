@@ -54,7 +54,7 @@ const bindEventDelegate = function(square) {
         let self = e.target
         let isTarget = self.classList.contains('cell')
         if (isTarget) {
-            vjkl(self, square)
+            openSquare(self, square)
 
             if (timeFlag) {
                 startTime()
@@ -75,7 +75,7 @@ const showEndPop = () => {
         title: 'Game over',
         text: 'Do you want another turn?',
         icon: 'error',
-        confirmButtonText: 'new game'
+        confirmButtonText: 'New Game'
     }).then((result) => {
         if (result.value) {
             clearGame()
@@ -84,7 +84,7 @@ const showEndPop = () => {
     })
 }
 
-const vjkl = function(cell, square) {
+const openSquare = function(cell, square) {
     let { number, x, y } = cell.dataset
     let classList = cell.classList
     let hasOpen = classList.contains('opened')
@@ -102,7 +102,7 @@ const vjkl = function(cell, square) {
 
     } else if (number === '0') {
         cell.classList.add('opened')
-        vjklAround(square, Number(x), Number(y))
+        openAround(square, Number(x), Number(y))
     } else {
         cell.classList.add('opened')
     }
@@ -115,23 +115,23 @@ const vjkl = function(cell, square) {
  * @param x 行
  * @param y 列
  */
-const vjklAround = function(square, x, y) {
+const openAround = function(square, x, y) {
     // 左边三个
-    vjkl1(square, x - 1, y - 1)
-    vjkl1(square, x, y - 1)
-    vjkl1(square, x + 1, y - 1)
+    canOpen(square, x - 1, y - 1)
+    canOpen(square, x, y - 1)
+    canOpen(square, x + 1, y - 1)
 
     // 上下两个
-    vjkl1(square, x - 1 , y)
-    vjkl1(square, x + 1, y)
+    canOpen(square, x - 1 , y)
+    canOpen(square, x + 1, y)
 
     // 右边三个
-    vjkl1(square, x - 1, y + 1)
-    vjkl1(square, x, y + 1)
-    vjkl1(square, x + 1, y + 1)
+    canOpen(square, x - 1, y + 1)
+    canOpen(square, x, y + 1)
+    canOpen(square, x + 1, y + 1)
 }
 
-const vjkl1 = function(square, x, y) {
+const canOpen = function(square, x, y) {
     if (x >= 0 && y >= 0 && x < square[0].length && y < square.length) {
         let selName = `[data-x="${ x }"][data-y="${ y }"]`
         let cell = eleSelector(selName)
@@ -147,7 +147,7 @@ const vjkl1 = function(square, x, y) {
             // 什么也不做
         } else if (number === '0') {
             cell.classList.add('opened')
-            vjklAround(square, x, y)
+            openAround(square, x, y)
         } else {
             cell.classList.add('opened')
         }

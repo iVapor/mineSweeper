@@ -3,7 +3,12 @@ const showSuccessPop = () => {
         title: 'You win',
         text: 'Congratulations! 🎉🎉🎉',
         icon: 'success',
-        confirmButtonText: 'new game'
+        confirmButtonText: 'New Game'
+    }).then((result) => {
+        if (result.value) {
+            clearGame()
+            game()
+        }
     })
 }
 
