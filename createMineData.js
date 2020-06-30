@@ -1,12 +1,34 @@
 
 const createRandom = (num) => {
-    return Math.random() > 0.92 ? num : 0
+    return Math.random() > 0.01 ? num : 0
 }
 
-const createLine = (num) => {
+const createLine = (num, y, ) => {
+    let locationStr = localStorage.getItem('firstLocation')
+    let location = ''
+    log('locationStr', locationStr)
+    let notEmpty = Boolean(locationStr)
+    log('notEmpty', notEmpty)
+    if (notEmpty) {
+        location = JSON.parse(locationStr)
+        log('location', location)
+    }
+
     let container = []
     for (let i = 0; i < num; i++) {
         let cell = createRandom(num)
+        let haveClick = location !== ''
+        if (haveClick) {
+            let clickLocation = location.xLocation === i && location.yLocation === y
+            log('clickLocation', clickLocation, 'x', location.xLocation, 'y', location.yLocation)
+            log('cell', cell, 'i', i, 'y', y)
+            while (cell === 9 && clickLocation) {
+                log('in while')
+                cell = createRandom(num)
+                log('cell', cell)
+            }
+        }
+
         container.push(cell)
     }
 
@@ -15,8 +37,10 @@ const createLine = (num) => {
 
 const createMine = (num) => {
     let container = []
+
+
     for (let i = 0; i < num; i++) {
-        let line = createLine(num)
+        let line = createLine(num, i)
         container.push(line)
     }
 
