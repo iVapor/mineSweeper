@@ -31,7 +31,6 @@ const validateFlag = () => {
 }
 
 const toggleFlag = (self) => {
-    log('self', self.dataset.number)
     let flagEle = self.querySelector('.flag')
     let countEle = eleSelector('.mine-count')
     let limit = Number(countEle.dataset.limit)

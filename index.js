@@ -62,7 +62,6 @@ const renderSquare = function(square) {
 
 const bindEventDelegate = function(square) {
     let allCell = eleSelector('#id-div-mime')
-    let timeFlag = true
     // 第一次点击
     window.firstFlag = true
     autoCountTime()
@@ -72,11 +71,6 @@ const bindEventDelegate = function(square) {
         if (isTarget) {
             openSquare(self, square, window.firstFlag)
             window.firstFlag = false
-            log('hello')
-            // if (timeFlag) {
-            //     startTime()
-            //     timeFlag = false
-            // }
         }
     })
 
@@ -115,7 +109,6 @@ const firstNotMine = (flag, x, y) => {
 }
 
 const openSquare = function(cell, square, firstFlag) {
-    log('in open, firstFlag', firstFlag)
     let { number, x, y } = cell.dataset
     let classList = cell.classList
     let hasOpen = classList.contains('opened')
