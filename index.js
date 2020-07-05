@@ -16,8 +16,21 @@ const templateCell = function(line, x) {
                 src="./img/flag.png" alt="flag"/>
             ${ inner }
         `
+
+        let locationStr = localStorage.getItem('firstLocation')
+        let notEmpty = Boolean(locationStr)
+        let location = ''
+        let clickedClass = ''
+        if (notEmpty) {
+            location = JSON.parse(locationStr)
+            if (location.xLocation === i && location.yLocation === x) {
+                clickedClass = 'opened'
+            }
+        }
+
+
         let cell = `
-            <div class="cell" data-number="${ member }" data-x="${ x }" data-y="${ i }">
+            <div class="cell ${ clickedClass }" data-number="${ member }" data-x="${ x }" data-y="${ i }">
                 ${ ele }</div>`
         container += cell
     }
@@ -49,21 +62,16 @@ const renderSquare = function(square) {
 
 const bindEventDelegate = function(square) {
     let allCell = eleSelector('#id-div-mime')
-    let timeFlag = true
+    // 第一次点击
+    window.firstFlag = true
+    autoCountTime()
     allCell.addEventListener('click', (e) => {
         let self = e.target
         let isTarget = self.classList.contains('cell')
         if (isTarget) {
-            openSquare(self, square)
-
-            if (timeFlag) {
-                startTime()
-                timeFlag = false
-            }
+            openSquare(self, square, window.firstFlag)
+            window.firstFlag = false
         }
-
-
-
     })
 
     setFlag()
@@ -84,7 +92,23 @@ const showEndPop = () => {
     })
 }
 
-const openSquare = function(cell, square) {
+const firstNotMine = (flag, x, y) => {
+    if (flag) {
+        let location = {
+            yLocation: x,
+            xLocation: y,
+        }
+        localStorage.setItem('firstLocation', JSON.stringify(location))
+        // 第一次踩雷标记
+        localStorage.setItem('firstMine', JSON.stringify(true))
+        clearGame()
+        game()
+        return true
+    }
+    return false
+}
+
+const openSquare = function(cell, square, firstFlag) {
     let { number, x, y } = cell.dataset
     let classList = cell.classList
     let hasOpen = classList.contains('opened')
@@ -93,6 +117,10 @@ const openSquare = function(cell, square) {
     }
 
     if (number === '9') {
+        let isFirst = firstNotMine(firstFlag, Number(x), Number(y))
+        if (isFirst) {
+            return
+        }
         // 游戏结束
         let container = eleSelector('#id-div-mime')
         container.classList.add('game-end')
