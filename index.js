@@ -16,8 +16,21 @@ const templateCell = function(line, x) {
                 src="./img/flag.png" alt="flag"/>
             ${ inner }
         `
+
+        let locationStr = localStorage.getItem('firstLocation')
+        let notEmpty = Boolean(locationStr)
+        let location = ''
+        let clickedClass = ''
+        if (notEmpty) {
+            location = JSON.parse(locationStr)
+            if (location.xLocation === i && location.yLocation === x) {
+                clickedClass = 'opened'
+            }
+        }
+
+
         let cell = `
-            <div class="cell" data-number="${ member }" data-x="${ x }" data-y="${ i }">
+            <div class="cell ${ clickedClass }" data-number="${ member }" data-x="${ x }" data-y="${ i }">
                 ${ ele }</div>`
         container += cell
     }
@@ -51,21 +64,20 @@ const bindEventDelegate = function(square) {
     let allCell = eleSelector('#id-div-mime')
     let timeFlag = true
     // 第一次点击
-    let firstFlag = true
+    window.firstFlag = true
+    autoCountTime()
     allCell.addEventListener('click', (e) => {
         let self = e.target
         let isTarget = self.classList.contains('cell')
         if (isTarget) {
-            openSquare(self, square, firstFlag)
-            firstFlag = false
-            if (timeFlag) {
-                startTime()
-                timeFlag = false
-            }
+            openSquare(self, square, window.firstFlag)
+            window.firstFlag = false
+            log('hello')
+            // if (timeFlag) {
+            //     startTime()
+            //     timeFlag = false
+            // }
         }
-
-
-
     })
 
     setFlag()
@@ -87,7 +99,6 @@ const showEndPop = () => {
 }
 
 const firstNotMine = (flag, x, y) => {
-    log('flgg', flag)
     if (flag) {
         let location = {
             yLocation: x,
@@ -104,6 +115,7 @@ const firstNotMine = (flag, x, y) => {
 }
 
 const openSquare = function(cell, square, firstFlag) {
+    log('in open, firstFlag', firstFlag)
     let { number, x, y } = cell.dataset
     let classList = cell.classList
     let hasOpen = classList.contains('opened')

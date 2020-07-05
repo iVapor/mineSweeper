@@ -123,6 +123,17 @@ const startTime = () => {
     localStorage.setItem('timeMark', JSON.stringify(timeMark))
 }
 
+/**
+ * 已经点击过，自动开启计时
+ */
+const autoCountTime = () => {
+    let locationStr = localStorage.getItem('firstLocation')
+    let notEmpty = Boolean(locationStr)
+    if (notEmpty) {
+        startTime()
+        localStorage.removeItem('firstLocation')
+    }
+}
 const resetTime = () => {
     let timeMark = JSON.parse(localStorage.getItem('timeMark'))
     clearInterval(timeMark)
